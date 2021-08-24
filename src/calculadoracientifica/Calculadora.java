@@ -11,10 +11,12 @@ public class Calculadora extends javax.swing.JPanel implements Serializable{
     private StringBuilder pantalla;
     private String resultado;
     private boolean activado = true;
+    private Expression operacion;
 
     public Calculadora() {
         initComponents();
         pantalla = new StringBuilder();
+        
         
     }
 
@@ -491,6 +493,7 @@ public class Calculadora extends javax.swing.JPanel implements Serializable{
 
     private void BotonAnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAnsActionPerformed
         if (!resultado.equals("")){
+            addNumberAndOperation(resultado);
             TextFieldInput.setText(resultado);
           
         } 
@@ -529,7 +532,16 @@ public class Calculadora extends javax.swing.JPanel implements Serializable{
     }//GEN-LAST:event_BotonDivisionActionPerformed
 
     private void BotonIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonIgualActionPerformed
-        
+        if(pantalla.length() > 0){
+            System.out.println(pantalla.toString());
+            
+            operacion = new Expression(pantalla.toString());
+            resultado = String.valueOf(operacion.calculate());
+            System.out.println("operacion : " + resultado);
+            TextFieldOutput.setText(resultado);
+//            
+            
+        }
     }//GEN-LAST:event_BotonIgualActionPerformed
 
   
